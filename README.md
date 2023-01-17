@@ -5,7 +5,6 @@
 #### In Every 1ms the awake() method is called, if the first job in the sleeping queue is ready to wake up, it will enter the runOrSleep() method and check if there are more jobs to transfer and will update all the jobs in the queue. 
 (Due to code efficiency considerations the queue will be updated only when the time of first job is up)  
 #### When ever a job is waking up, the Logger inform that a job.id woke up and transferred to the running queue.
-#### The start time will be 00:00 in two days and the end time will be 00:00 in three days.
 
 #### 🌐 Technicals
    * Written in Java
