@@ -7,12 +7,5 @@
 #### When ever a job is waking up, the Logger inform that a job.id woke up and transferred to the running queue.
 #### The start time will be 00:00 in two days and the end time will be 00:00 in three days.
 
-#### 🧙🏼‍♂️ The hat will stay on the head:
-   * All the point on the graph will have 🎩 icon and will be below the limit.
-
-#### 🌪 The hat will blow away from the head
-   * If there is an hour that the wind speed is higher than the limit, the icon of the point will be 🌬 if the wind speed is between 15m/s to 30m/s
-     and 🌪 if higher than 30m/s, and a message will shown.
-
 #### 🌐 Technicals
    * Written in Java
