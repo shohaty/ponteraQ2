@@ -7,6 +7,7 @@ import scheduler.job.JobTimeStructure;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.logging.Logger;
 
 public class OS {
@@ -15,13 +16,13 @@ public class OS {
     private static final long TIME_TO_AWAKE = 0;
     // You should define & implement the data structures below.
     private static PriorityQueue<JobTimeStructure> sleepingJobs = new PriorityQueue<JobTimeStructure>();
-    private static LinkedList<JobTimeStructure> runningJobs = new LinkedList<JobTimeStructure>();
+    private static Queue<JobTimeStructure> runningJobs = new LinkedList<JobTimeStructure>();
 
     public static PriorityQueue<JobTimeStructure> getSleepingJobs() {
         return sleepingJobs;
     }
 
-    public static LinkedList<JobTimeStructure> getRunningJobs() {
+    public static Queue<JobTimeStructure> getRunningJobs() {
         return runningJobs;
     }
 
@@ -50,7 +51,7 @@ public class OS {
 
         if (sleepingJobs.isEmpty()) {
             //print that the queue is empty
-            System.out.println("The sleeping queue is empty");
+            LOGGER.info("The sleepingJobs queue is empty");
             return;
         } else {
             //if the first job in the queue is ready to run enter runOrSleep
@@ -64,24 +65,23 @@ public class OS {
             awake();
         }
     }
-
     public static void runOrSleep() throws mySchedulerException {
         //add lock to the function
         final Object lock = new Object();
         synchronized (lock) {
             try {
-                long currentTime = sleepingJobs.peek().getOriginalTime();
+                long currentTime = sleepingJobs.peek().getSleepingTimeLeft();
                 Iterator<JobTimeStructure> sleepingQueueIterator = sleepingJobs.iterator();
                 while (sleepingQueueIterator.hasNext()) {
                     JobTimeStructure currentJob = sleepingQueueIterator.next();
-                    if (currentJob.getOriginalTime() == currentTime) {
+                    if (currentJob.getSleepingTimeLeft() == currentTime) {
                         Job job = (Job) currentJob.getJob();
                         LOGGER.info("transfer from sleepjobs to Runningjobs, job id: " + job.getJobId());
                         runningJobs.add(currentJob);
                         sleepingQueueIterator.remove();
-                    } else //reduce the original time and the current time of the iterator by current time
+                    } else //reduce the sleeping time left and the current time of the iterator by current time
                     {
-                        currentJob.setOriginalTime(currentJob.getOriginalTime() - currentTime);
+                        currentJob.setSleepingTimeLeft(currentJob.getSleepingTimeLeft() - currentTime);
                         currentJob.setCurrentTime(currentJob.getCurrentTime() - currentTime);
                     }
                 }

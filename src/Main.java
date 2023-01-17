@@ -13,12 +13,12 @@ public class Main {
 
         try {
             jobs[0].sleep(10);
-            jobs[1].sleep(6);
-            jobs[2].sleep(2);
-            jobs[3].sleep(1);
-            jobs[4].sleep(4);
-            jobs[5].sleep(9);
-            System.out.println(jobs[0] + "," + jobs[1] + "," + jobs[2] + "," + jobs[3] + "," + jobs[4] + "," + jobs[5]);
+            jobs[1].sleep(1);
+            jobs[2].sleep(140);
+            jobs[3].sleep(16);
+            jobs[4].sleep(180);
+            jobs[5].sleep(4);
+            //System.out.println(jobs[0] + "," + jobs[1] + "," + jobs[2] + "," + jobs[3] + "," + jobs[4] + "," + jobs[5]);
             System.out.println(OS.getSleepingJobs());
 
             OS.awake();

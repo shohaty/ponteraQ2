@@ -1,5 +1,6 @@
 package scheduler.job;
 
+import scheduler.exception.mySchedulerException;
 import scheduler.os.OS;
 
 public class  Job {
@@ -12,7 +13,13 @@ public class  Job {
 
     public void sleep(long ms)
     {
-        OS.sleep(this, ms);
+        try {
+            OS.sleep(this, ms);
+        }
+        catch (mySchedulerException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
     public Long getJobId() {

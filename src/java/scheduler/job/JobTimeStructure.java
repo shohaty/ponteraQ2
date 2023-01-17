@@ -2,32 +2,31 @@ package scheduler.job;
 
 public class JobTimeStructure<Job, Long> implements Comparable
 {
-
     private Job job;
-    private long originalTime;
+    private long sleepingTimeLeft;
     private long currentTime;
     public JobTimeStructure(Job job, long time)
     {
         this.job = job;
         this.currentTime = time;
-        this.originalTime = time;
+        this.sleepingTimeLeft = time;
     }
     public Job getJob()
     {
         return job;
     }
 
-    public long getOriginalTime()
+    public long getSleepingTimeLeft()
     {
-        return originalTime;
+        return sleepingTimeLeft;
     }
     public long getCurrentTime()
     {
         return currentTime;
     }
-    public void setOriginalTime(long time)
+    public void setSleepingTimeLeft(long time)
     {
-        this.originalTime = time;
+        this.sleepingTimeLeft = time;
     }
 
     public void setCurrentTime(long time)
@@ -38,9 +37,9 @@ public class JobTimeStructure<Job, Long> implements Comparable
     public int compareTo(Object o)
     {
         JobTimeStructure pair = (JobTimeStructure) o;
-        if (this.originalTime > pair.originalTime)
+        if (this.sleepingTimeLeft > pair.sleepingTimeLeft)
             return 1;
-        else if (this.originalTime < pair.originalTime)
+        else if (this.sleepingTimeLeft < pair.sleepingTimeLeft)
             return -1;
         return 0;
     }
@@ -48,6 +47,6 @@ public class JobTimeStructure<Job, Long> implements Comparable
     @Override
     public String toString()
     {
-        return "job.Job: " + job + " Time: " + originalTime + " Current Time: " + currentTime;
+        return "job.Job: " + job + " Time: " + sleepingTimeLeft + " Current Time: " + currentTime;
     }
 }
